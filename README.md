@@ -1,4 +1,4 @@
-# Shopify Webhook Verifier (.NET Core)
+# Shopify Webhook Verifier (.NET 6.0)
 
 This project is a simple ASP.NET Core API for receiving and verifying Shopify webhooks using HMAC authentication. It demonstrates how to securely validate incoming Shopify webhook events using your webhook secret.
 
