@@ -17,13 +17,11 @@ using System;
 public class WebhooksController : ControllerBase
 {
     private readonly IWebhookAuthenticationService _webhookAuthenticationService;
-    private readonly IInventoryService _inventoryService;
     private readonly ILogger<WebhooksController> _logger;
     private const string CLIENT_SECRET = "e6962cdcf571d0de35fe04de1f08acc07024de30abe7e63443f3fd1220c97d51";
-    public WebhooksController(IWebhookAuthenticationService webhookAuthenticationService, IInventoryService inventoryService, ILogger<WebhooksController> logger)
+    public WebhooksController(IWebhookAuthenticationService webhookAuthenticationService,ILogger<WebhooksController> logger)
     {
         _webhookAuthenticationService = webhookAuthenticationService;
-        _inventoryService = inventoryService;
         _logger = logger;
     }
 
@@ -45,7 +43,7 @@ public class WebhooksController : ControllerBase
         {
             await dataStream.CopyToAsync(memoryStream);
             memoryStream.Position = 0;
-
+    
             var dataBytes = memoryStream.ToArray();
             var computedHmac = ComputeHmac(dataBytes, CLIENT_SECRET);
             return SecureCompare(computedHmac, hmacHeader);

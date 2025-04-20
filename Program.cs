@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using ShopifyAPI.Interfaces;
-using ShopifyAPI.Models;
-using ShopifyAPI.Services;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
@@ -10,15 +8,6 @@ using Newtonsoft.Json.Serialization;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddScoped<IWebhookAuthenticationService, WebhookAuthenticationService>();
-builder.Services.AddScoped<IInventoryService, InventoryService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-builder.Services.AddDbContext<ClothingStoreContext>(options =>
-    options.UseSqlServer(connectionString));
 
 builder.Services.AddControllers()
         .AddNewtonsoftJson(options => {
